@@ -64,9 +64,11 @@ deactivate
 
 ## 6. Run the Project
 
-After installing the required dependencies in the virtual environment, you can start the project. For example, you may need to run the main program or start a web service.
+After installing the required dependencies in the virtual environment, you can start the project. For example, you can run the UI.py directly.
 
-> Note: The specific way to start the project may vary, please follow the instructions in the project documentation.
+```bash
+python UI.py
+```
 
 ---
 
