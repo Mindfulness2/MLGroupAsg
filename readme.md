@@ -1,3 +1,7 @@
+# Diabetes Classification With Machine Learning
+
+![Project Preview](./preview.png)
+
 # Project Environment Setup Guide
 
 ## 1. Install Python and pip
@@ -8,6 +12,7 @@ Make sure that Python and `pip` are installed on your system. You can verify the
 python --version
 pip --version
 ```
+
 
 If Python is not installed, please visit the [Python official website](https://www.python.org/downloads/) to download and install it.
 
