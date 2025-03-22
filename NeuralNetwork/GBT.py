@@ -8,7 +8,7 @@ data = pd.read_csv('Processed_Dataset_of_Diabetes_Version3.csv')
 X = data.drop('CLASS', axis=1)  # Features
 y = data['CLASS']                # Label
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
 print(X_train.dtypes)
 print(X_train['Gender'].unique())
@@ -58,4 +58,4 @@ plt.xlabel('Feature Importance')
 plt.title('Feature Importance for Gradient Boosting Model')
 plt.show()
 
-dump(gb_model,'GBT.joblib')
+dump(gb_model,'GBT3.joblib')

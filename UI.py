@@ -10,7 +10,7 @@ from sklearn.metrics import accuracy_score, f1_score, log_loss
 from tensorflow.keras.models import load_model
 
 # 读取数据集
-df = pd.read_csv("dataset.csv")
+df = pd.read_csv("Processed_Dataset_of_Diabetes_Version3.csv")
 X = df.iloc[:, :-1]  # 特征列
 y = df.iloc[:, -1]   # 标签列
 MODELS_DIR = "./models"
@@ -19,7 +19,8 @@ model_options = {
     "DNN": "DNN.joblib",
     "FNN": "FNN.joblib",
     "GBT": "GBT.joblib",
-    "RF": "RF.joblib",
+    "RandomForest": "RandomForest.joblib",
+    "LightGBM": "LightGBM.joblib",
 }
 
 
@@ -28,9 +29,19 @@ def evaluate_model(model_name, split_ratio):
     # 加载模型
     #model_path = model_options[model_name]
     model_path = os.path.join(MODELS_DIR, f"{model_name}.joblib")
+    if split_ratio != "8:2":
+        model_path = os.path.join(MODELS_DIR, f"{model_name}3.joblib")
     # 训练损失和验证损失图片路径
     if model_name in ["DNN", "FNN"]:
-        LOSS_IMG = f"{model_name}_loss_curve.png"
+        if split_ratio == "8:2":
+            LOSS_IMG = f"{model_name}_loss_curve.png"
+        else:
+            LOSS_IMG = f"{model_name}3_loss_curve.png"
+    elif model_name in ["LightGBM"]:
+        if split_ratio == "8:2":
+            LOSS_IMG = f"{model_name}_loss_curve.png"
+        else:
+            LOSS_IMG = f"{model_name}3_loss_curve.png"
     else:
         LOSS_IMG = None
 
@@ -100,19 +111,19 @@ def evaluate_model(model_name, split_ratio):
 #     description="选择一个模型并设置数据集分割比例，查看评估结果"
 # )
 
-with gr.Blocks(title="机器学习模型评估") as demo:
+with gr.Blocks(title="Diabetes Model Evaluation") as demo:
       
     with gr.Row():
         # 左侧面板：模型选择和评估指标
         with gr.Column(scale=1):
-            gr.Markdown("# 机器学习模型评估")
-            gr.Markdown("选择一个模型并设置数据集分割比例，查看评估结果")
+            gr.Markdown("# Model Evaluation")
+            gr.Markdown("Select a model and set the dataset split ratio to view the evaluation results.")
 
-            model = gr.Dropdown(list(model_options.keys()), label="选择模型")
-            split_ratio = gr.Radio(["8:2", "7:3"], label="数据集分割比例")
+            model = gr.Dropdown(list(model_options.keys()), label="Select Model")
+            split_ratio = gr.Radio(["8:2", "7:3"], label="Dataset split ratio")
             
             # 评估按钮
-            eval_button = gr.Button("评估模型")
+            eval_button = gr.Button("Evaluate")
             
             # 评估指标 - 创建为输出组件
             accuracy_output = gr.Textbox(label="Accuracy")
@@ -121,8 +132,8 @@ with gr.Blocks(title="机器学习模型评估") as demo:
         
         # 右侧面板：图表显示
         with gr.Column(scale=2):
-            eval_plot = gr.Plot(label="评估图像")
-            train_loss_curve = gr.Image(label="Training Loss 曲线")
+            eval_plot = gr.Plot(label="Evaluate")
+            train_loss_curve = gr.Image(label="Training Loss Curve")
     
     # 按钮点击事件
     eval_button.click(

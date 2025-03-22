@@ -19,7 +19,7 @@ y = df['CLASS']
 y = y.astype('category').cat.codes
 
 # 划分训练集和测试集
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
 # 标准化特征
 scaler = StandardScaler()
@@ -68,4 +68,4 @@ plt.savefig("FNN_loss_curve.png")
 plt.show()
 
 # 保存模型
-dump(model, 'FNN.joblib')
+dump(model, 'FNN3.joblib')

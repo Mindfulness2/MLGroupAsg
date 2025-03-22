@@ -27,7 +27,7 @@ X = X.loc[y.index]
 y = tf.keras.utils.to_categorical(y, num_classes=3)
 
 # 划分训练集和测试集
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
 # 标准化特征
 scaler = StandardScaler()
@@ -73,8 +73,8 @@ plt.xlabel('Epochs')
 plt.ylabel('Loss')
 plt.title('Training and Validation Loss')
 plt.legend()
-plt.savefig("DNN_loss_curve.png")
+plt.savefig("DNN_loss_curve3.png")
 plt.show()
 # 保存模型
-dump(model, 'DNN.joblib')
+dump(model, 'DNN3.joblib')
 #dump({"model": model, "scaler": scaler}, "DNN.joblib")
