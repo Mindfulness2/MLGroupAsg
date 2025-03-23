@@ -21,6 +21,7 @@ model_options = {
     "GBT": "GBT.joblib",
     "RandomForest": "RandomForest.joblib",
     "LightGBM": "LightGBM.joblib",
+    "XGBoost": "XGBoost.joblib",
 }
 
 
@@ -42,6 +43,9 @@ def evaluate_model(model_name, split_ratio):
             LOSS_IMG = f"{model_name}_loss_curve.png"
         else:
             LOSS_IMG = f"{model_name}3_loss_curve.png"
+    # elif model_name in ["XGBoost"]:
+    #     if split_ratio == "8:2":
+    #         LOSS_IMG = f"{model_name}_loss_curve.png"
     else:
         LOSS_IMG = None
 
@@ -50,6 +54,8 @@ def evaluate_model(model_name, split_ratio):
     
     if model_name in ["DNN", "FNN"]:
         X_selected = X[['BMI', 'Chol', 'HbA1c', 'AGE']]
+    elif model_name in ["XGBoost"]:
+        X_selected = X[['Urea', 'Cr', 'HbA1c', 'BMI']]
     else:
         X_selected = X  # 其他模型用全部特征
 
