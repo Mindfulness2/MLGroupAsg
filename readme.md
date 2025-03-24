@@ -47,7 +47,7 @@ Make sure the `requirements.txt` file is located in the root directory of your p
 pip install -r requirements.txt
 ```
 
-This command will automatically install all the Python libraries listed in `requirements.txt`.
+This command will automatically install all the Python libraries listed in `requirement.txt`.
 
 ## 4. Verify Installation
 
