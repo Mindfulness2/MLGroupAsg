@@ -120,7 +120,7 @@ def predict_class(model_name, gender, age, urea, cr, hba1c, chol, tg, hdl, ldl, 
     
     return f"Predicted CLASS: {prediction[0]}"
 
-with gr.Blocks(title="Diabetes Model Evaluation") as demo:
+with gr.Blocks(title="Diabetes Model Evaluation" )as demo:
     with gr.Tabs() as tabs:
 
         
@@ -162,7 +162,7 @@ with gr.Blocks(title="Diabetes Model Evaluation") as demo:
                         with gr.Row():
                             gender = gr.Radio(
                                 choices=[0, 1], 
-                                label="Gender (0-Female, 1-Male)", 
+                                label="Gender (0-Male, 1-Female)", 
                                 value=1
                             )
                             age = gr.Slider(
